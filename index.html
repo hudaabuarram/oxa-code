@@ -1,13 +1,1094 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Oxa Code - Infinite Software Solutions</title>
+    <!-- Lucide Icons CDN for easy, offline-fallback vector icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
   </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+  <body class="bg-brand-dark text-brand-text font-sans antialiased overflow-x-hidden min-h-screen relative transition-colors duration-300">
+    
+    <!-- Loader overlay for professional entrance -->
+    <div id="app-loader" class="fixed inset-0 bg-[#030513] z-[9999] flex flex-col items-center justify-center transition-all duration-500 gap-4">
+      <div class="relative w-16 h-16 flex items-center justify-center">
+        <div class="absolute inset-0 rounded-full border-4 border-brand-purple/20 border-t-brand-cyan animate-spin"></div>
+        <span class="font-mono text-[9px] font-bold text-brand-cyan mt-1">&lt;/&gt;</span>
+      </div>
+      <div class="text-center">
+        <h4 class="font-display font-bold text-sm tracking-[0.2em] text-white">OXA CODE</h4>
+        <p class="font-mono text-[9px] text-brand-dim uppercase tracking-[0.1em] mt-1.5">Loading Infinite Solutions...</p>
+      </div>
+    </div>
+
+    <!-- BACKGROUND GRADIENT BLURS (Static ambient spotlights) -->
+    <div class="absolute top-0 left-0 right-0 h-[800px] bg-mesh pointer-events-none opacity-80 z-0"></div>
+
+    <!-- MAIN NAVBAR (HEADER) -->
+    <header id="oxa-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent py-5">
+      <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
+        
+        <!-- Logo -->
+        <a href="#home" data-nav="home" class="flex items-center gap-4 group">
+          <div class="relative w-[76px] h-[45px] group">
+            <div class="absolute -inset-2 bg-gradient-to-r from-[#00f0ff] via-[#7000ff] to-[#2563eb] rounded-full opacity-20 blur-lg group-hover:opacity-45 transition-opacity duration-300 pointer-events-none"></div>
+            <!-- Custom Interlocking Logo SVG - enlarged for user request -->
+            <svg viewBox="0 0 170 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full drop-shadow-[0_4px_20px_rgba(0,240,255,0.25)] relative z-10">
+              <defs>
+                <linearGradient id="lhRingGrad" x1="28" y1="20" x2="92" y2="80" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stopColor="#00f0ff" />
+                  <stop offset="50%" stopColor="#2563eb" />
+                  <stop offset="100%" stopColor="#7000ff" />
+                </linearGradient>
+                <linearGradient id="rhRingGrad" x1="78" y1="20" x2="142" y2="80" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stopColor="#3b82f6" />
+                  <stop offset="50%" stopColor="#7000ff" />
+                  <stop offset="100%" stopColor="#d946ef" />
+                </linearGradient>
+                <linearGradient id="cGradLeft" x1="44" y1="40" x2="74" y2="60" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stopColor="#00f0ff" />
+                  <stop offset="100%" stopColor="#3b82f6" />
+                </linearGradient>
+                <linearGradient id="cGradRight" x1="94" y1="40" x2="124" y2="60" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stopColor="#8b5cf6" />
+                  <stop offset="100%" stopColor="#f472b6" />
+                </linearGradient>
+              </defs>
+              <circle cx="60" cy="50" r="26" stroke="url(#lhRingGrad)" stroke-width="11.5" fill="none" />
+              <path d="M 128.38 31.62 A 26 26 0 1 0 128.38 68.38" stroke="url(#rhRingGrad)" stroke-width="11.5" fill="none" stroke-linecap="round" />
+              <path d="M 76.61 30 A 26 26 0 0 1 85.69 46" stroke="url(#lhRingGrad)" stroke-width="11.5" fill="none" stroke-linecap="round" />
+              <g>
+                <path d="M 49.5 46.5 L 45 50 L 49.5 53.5" stroke="url(#cGradLeft)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M 57 56.5 L 62.5 43.5" stroke="url(#cGradLeft)" stroke-width="3" stroke-linecap="round" />
+                <path d="M 68.5 46.5 L 73 50 L 68.5 53.5" stroke="url(#cGradLeft)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+              </g>
+              <g>
+                <path d="M 99.5 46.5 L 95 50 L 99.5 53.5" stroke="url(#cGradRight)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M 107 56.5 L 112.5 43.5" stroke="url(#cGradRight)" stroke-width="3" stroke-linecap="round" />
+                <path d="M 118.5 46.5 L 123 50 L 118.5 53.5" stroke="url(#cGradRight)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+              </g>
+            </svg>
+          </div>
+          <div class="flex flex-col">
+            <span class="font-display font-extrabold text-[#f3f4f6] dark:text-[#f3f4f6] text-xl md:text-2xl tracking-wide block leading-none transition-all">OXA CODE</span>
+            <span class="font-mono text-[#9ca3af] text-[10px] tracking-[0.2em] mt-1 uppercase block leading-none">Infinite Solutions</span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Items -->
+        <nav class="hidden md:flex items-center gap-1 bg-brand-card border border-brand-border px-2.5 py-1.5 rounded-full backdrop-blur-md relative z-10">
+          <button data-nav="home" class="relative px-4 py-1.5 text-sm font-semibold transition-all rounded-full text-white bg-gradient-to-r from-brand-purple/20 to-brand-cyan/20 border border-brand-border">
+            <span class="relative z-10" data-t="navHome">Home</span>
+          </button>
+          <button data-nav="services" class="relative px-4 py-1.5 text-sm font-medium transition-all rounded-full text-brand-muted hover:text-brand-text">
+            <span class="relative z-10" data-t="navServices">Services</span>
+          </button>
+          <button data-nav="portfolio" class="relative px-4 py-1.5 text-sm font-medium transition-all rounded-full text-brand-muted hover:text-brand-text">
+            <span class="relative z-10" data-t="navPortfolio">Portfolio</span>
+          </button>
+          <button data-nav="about" class="relative px-4 py-1.5 text-sm font-medium transition-all rounded-full text-brand-muted hover:text-brand-text">
+            <span class="relative z-10" data-t="navAbout">About Us</span>
+          </button>
+          <button data-nav="contact" class="relative px-4 py-1.5 text-sm font-medium transition-all rounded-full text-brand-muted hover:text-brand-text">
+            <span class="relative z-10" data-t="navContact">Contact</span>
+          </button>
+        </nav>
+
+        <!-- Right Hand Controls (Theme, Language, CTA) -->
+        <div class="hidden md:flex items-center gap-4 relative z-10">
+          
+          <!-- Theme Toggle Button -->
+          <button id="theme-toggle" class="w-10 h-10 rounded-full bg-brand-card hover:bg-brand-card-hover border border-brand-border flex items-center justify-center text-brand-muted hover:text-brand-text transition-all duration-250 cursor-pointer" aria-label="Toggle Theme">
+            <i data-lucide="sun" class="w-4 h-4 text-amber-400 animate-pulse block dark:hidden"></i>
+            <i data-lucide="moon" class="w-4 h-4 text-indigo-400 hidden dark:block"></i>
+          </button>
+
+          <!-- Language Dropdown -->
+          <div class="relative">
+            <button id="lang-menu-btn" class="flex items-center gap-2 text-sm font-medium text-brand-muted hover:text-brand-text transition-all py-1.5 px-3.5 rounded-full hover:bg-brand-card border border-brand-border">
+              <i data-lucide="globe" class="w-4 h-4 text-brand-cyan"></i>
+              <span id="current-lang-label">EN</span>
+              <i data-lucide="chevron-down" id="lang-chevron" class="w-3.5 h-3.5 transition-transform duration-200"></i>
+            </button>
+            <div id="lang-dropdown" class="absolute right-0 mt-2 w-32 rounded-xl bg-brand-secondary border border-brand-border shadow-2xl p-1.5 hidden origin-top-right">
+              <button data-lang-select="en" class="w-full px-3 py-2 rounded-lg text-sm font-semibold text-left transition-all bg-gradient-to-r from-brand-purple/20 to-brand-cyan/20 text-white">English</button>
+              <button data-lang-select="ar" class="w-full px-3 py-2 rounded-lg text-sm font-medium text-left transition-all text-brand-muted hover:text-brand-text hover:bg-brand-card mt-1">العربية</button>
+            </div>
+          </div>
+
+          <!-- Main CTA Start Button -->
+          <button data-open-wizard class="relative overflow-hidden px-5.5 py-2.5 rounded-xl text-sm font-bold text-white bg-gradient-to-r from-brand-purple to-brand-blue shadow-[0_4px_20px_rgba(112,0,255,0.3)] transition-transform duration-200 hover:-translate-y-0.5 hover:shadow-[0_4px_25px_rgba(0,240,255,0.45)] flex items-center gap-2 cursor-pointer">
+            <span data-t="startProject">Start Your Project</span>
+            <i data-lucide="arrow-right" class="w-4 h-4 rtl:rotate-180"></i>
+          </button>
+        </div>
+
+        <!-- Mobile Layout Header Triggers -->
+        <div class="flex md:hidden items-center gap-2 relative z-10">
+          <!-- Mobile Theme Trigger -->
+          <button id="mobile-theme-toggle" class="w-9 h-9 rounded-full bg-brand-card border border-brand-border text-brand-muted flex items-center justify-center">
+            <i data-lucide="sun" class="w-4 h-4 text-amber-400 block dark:hidden"></i>
+            <i data-lucide="moon" class="w-4 h-4 text-indigo-400 hidden dark:block"></i>
+          </button>
+          
+          <!-- Mobile Language Quick Switch -->
+          <button id="mobile-lang-toggle" class="w-9 h-9 rounded-full bg-brand-card border border-brand-border text-brand-muted flex items-center justify-center">
+            <i data-lucide="globe" class="w-4 h-4 text-brand-cyan animate-spin-slow"></i>
+          </button>
+
+          <!-- Mobile Nav Toggle Burger -->
+          <button id="mobile-menu-btn" class="w-9 h-9 rounded-full bg-brand-card border border-brand-border text-brand-text flex items-center justify-center">
+            <i data-lucide="menu" id="burger-icon" class="w-4 h-4"></i>
+            <i data-lucide="x" id="close-icon" class="w-4 h-4 hidden"></i>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Mobile Navigation Drawer -->
+      <div id="mobile-menu" class="hidden md:hidden w-full bg-brand-dark/95 border-b border-brand-border backdrop-blur-lg absolute top-full left-0 z-40 transition-all duration-300">
+        <div class="px-6 py-6 flex flex-col gap-4">
+          <button data-nav="home" class="py-2.5 px-4 rounded-lg text-base font-bold text-left bg-gradient-to-r from-brand-purple/10 to-brand-cyan/10 border-l-2 border-brand-cyan text-brand-text">Home</button>
+          <button data-nav="services" class="py-2.5 px-4 rounded-lg text-base font-semibold text-left text-brand-muted hover:text-brand-text">Services</button>
+          <button data-nav="portfolio" class="py-2.5 px-4 rounded-lg text-base font-semibold text-left text-brand-muted hover:text-brand-text">Portfolio</button>
+          <button data-nav="about" class="py-2.5 px-4 rounded-lg text-base font-semibold text-left text-brand-muted hover:text-brand-text">About Us</button>
+          <button data-nav="contact" class="py-2.5 px-4 rounded-lg text-base font-semibold text-left text-brand-muted hover:text-brand-text">Contact</button>
+          <hr class="border-brand-border my-1" />
+          <button data-open-wizard class="w-full py-3 rounded-xl font-bold text-center text-white bg-gradient-to-r from-brand-purple to-brand-blue flex items-center justify-center gap-2 shadow-lg">
+            <span data-t="startProject">Start Your Project</span>
+            <i data-lucide="arrow-right" class="w-4 h-4 rtl:rotate-180"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN APP CANVAS / CONTENT VIEWER -->
+    <main class="min-h-[75vh] relative z-10">
+
+      <!-- ================= PAGE 1: HOME ================= -->
+      <div id="page-home" class="page-view space-y-16">
+        
+        <!-- Hero Section with Mockup -->
+        <section class="relative min-h-screen pt-28 pb-16 lg:pt-36 lg:pb-24 flex items-center overflow-hidden">
+          
+          <!-- Code Particles Overlay -->
+          <div id="code-particles" class="absolute inset-0 pointer-events-none hidden md:block select-none overflow-hidden z-0">
+            <!-- Particles injected via JS -->
+          </div>
+
+          <div class="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center relative z-10">
+            
+            <!-- Column 1: Copywriting -->
+            <div class="lg:col-span-6 space-y-6 lg:space-y-8 text-center lg:text-left flex flex-col items-center lg:items-start transition-transform duration-300 ease-out">
+              
+              <!-- Subtle badge -->
+              <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand-purple/35 bg-brand-purple/5 backdrop-blur-md shadow-sm">
+                <i data-lucide="sparkles" class="w-3.5 h-3.5 text-brand-cyan animate-pulse"></i>
+                <span class="text-[10px] md:text-xs font-bold font-mono tracking-wider text-brand-cyan uppercase" data-t="taglineBadge">WE BUILD DIGITAL SOLUTIONS</span>
+              </div>
+
+              <!-- Typography Headings -->
+              <div class="space-y-4 max-w-2xl lg:max-w-none">
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-display font-extrabold text-brand-text tracking-tight leading-[1.12] lg:text-left rtl:lg:text-right">
+                  <span data-t="heroTitlePart1">We Build </span>
+                  <span class="text-brand-text" data-t="heroTitlePart2">Software </span>
+                  <span data-t="heroTitlePart3">That Drives </span>
+                  <br class="hidden sm:inline" />
+                  
+                  <!-- Rotating Word Canvas -->
+                  <span class="inline-block mt-2 min-h-[1.1em] relative">
+                    <span id="rotating-word" class="text-transparent bg-clip-text bg-gradient-to-r from-brand-cyan via-brand-purple to-brand-blue font-black inline-block drop-shadow-[0_0_20px_rgba(0,240,255,0.25)] transition-all duration-300">Business Forward</span>
+                  </span>
+                </h1>
+                
+                <p class="text-sm sm:text-base md:text-lg text-brand-muted leading-relaxed max-w-xl mx-auto lg:mx-0 lg:text-left rtl:lg:text-right" data-t="heroDescription">
+                  OxaCode is a full-stack development agency creating powerful web, mobile and digital solutions that help businesses grow, innovate and lead in the digital world.
+                </p>
+              </div>
+
+              <!-- Actions -->
+              <div class="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
+                <button data-open-wizard class="w-full sm:w-auto px-8 py-4 rounded-xl font-bold text-white bg-gradient-to-r from-brand-purple to-brand-blue shadow-[0_4px_25px_rgba(112,0,255,0.3)] hover:shadow-[0_4px_30px_rgba(0,240,255,0.45)] hover:scale-[1.02] transition-all duration-350 flex items-center justify-center gap-2 cursor-pointer text-sm font-sans">
+                  <span data-t="startProject">Start Your Project</span>
+                  <i data-lucide="arrow-right" class="w-4 h-4 rtl:rotate-180"></i>
+                </button>
+                <button id="btn-see-work" class="w-full sm:w-auto px-7 py-4 rounded-xl font-bold text-brand-muted hover:text-brand-text bg-brand-card hover:bg-brand-card-hover border border-brand-border hover:border-brand-border-hover transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer text-sm shadow-sm">
+                  <i data-lucide="play-circle" class="w-5 h-5 text-brand-cyan animate-pulse"></i>
+                  <span data-t="seeWork">See Our Work</span>
+                </button>
+              </div>
+
+            </div>
+
+            <!-- Column 2: Interactive 3D Mockup Scene (Undeniably a clear laptop) -->
+            <div class="lg:col-span-6 flex items-center justify-center relative w-full overflow-visible">
+              
+              <!-- 3D Floating Canvas -->
+              <div id="hero-laptop-canvas" class="relative w-full aspect-[4/3] flex items-center justify-center transition-all duration-500 ease-out select-none">
+                
+                <!-- Laptop Core Wrapper (Pristine 3D geometry structure) -->
+                <div class="laptop-device-wrapper relative w-[86%] aspect-[1.6] flex flex-col items-center justify-end overflow-visible">
+                  
+                  <!-- [1] LAPTOP LID (SCREEN) -->
+                  <div class="laptop-screen-bezel w-full h-full rounded-2xl p-[2px] overflow-hidden relative transition-all duration-500 bg-gradient-to-b from-[#1c223c] to-[#0a0d1e] dark:from-[#1c223c] dark:to-[#0a0d1e] border border-white/10 dark:border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.65)] light:from-[#e2e8f0] light:to-[#cbd5e1] light:border-slate-350/40 light:shadow-[0_15px_40px_rgba(15,23,42,0.1)]">
+                    
+                    <!-- Screen inner glass panel -->
+                    <div class="laptop-screen-inner w-full h-full rounded-xl flex flex-col p-1.5 overflow-hidden relative bg-[#050715] dark:bg-[#050715] light:bg-[#f8fafc]">
+                      
+                      <!-- Bezel Top Notch (Webcam + status lights) -->
+                      <div class="w-full h-4.5 flex items-center justify-between px-3 text-[9px] font-mono pb-1 border-b border-white/5 dark:border-white/5 light:border-slate-200 text-gray-500 dark:text-gray-500 light:text-slate-450 shrink-0">
+                        <div class="flex gap-1.5 items-center">
+                          <span class="w-1.5 h-1.5 rounded-full bg-red-500/60"></span>
+                          <span class="w-1.5 h-1.5 rounded-full bg-yellow-500/60"></span>
+                          <span class="w-1.5 h-1.5 rounded-full bg-green-500/60"></span>
+                        </div>
+                        <div class="flex items-center gap-1">
+                          <i data-lucide="monitor" class="w-2.5 h-2.5"></i>
+                          <span>oxa-cloud-instance-01</span>
+                        </div>
+                        <div class="flex items-center gap-1.5">
+                          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                          <span class="text-[8px] text-emerald-500 font-bold">ONLINE</span>
+                        </div>
+                      </div>
+
+                      <!-- Dashboard Workspace inside the Screen -->
+                      <div class="flex-1 flex overflow-hidden">
+                        
+                        <!-- Dashboard Left Rail (Sidebar) -->
+                        <div class="w-[24%] p-1.5 flex flex-col justify-between border-r border-white/5 dark:border-white/5 light:border-slate-200 bg-[#040510]/80 dark:bg-[#040510]/80 light:bg-white shrink-0">
+                          <div class="space-y-3">
+                            <div class="flex items-center gap-1 px-1">
+                              <div class="w-4 h-4 rounded-md bg-gradient-to-tr from-brand-purple to-brand-cyan flex items-center justify-center p-[0.5px]">
+                                <span class="text-[7px] font-bold text-white leading-none">&lt;&gt;</span>
+                              </div>
+                              <span class="text-[8px] font-bold tracking-wider text-white dark:text-white light:text-slate-800">OXA CODE</span>
+                            </div>
+                            <div class="space-y-0.5" id="laptop-sidebar-links">
+                              <!-- Sidebar links generated via JS -->
+                            </div>
+                          </div>
+                          <div class="text-[7px] font-mono px-1 text-gray-650 dark:text-gray-650 light:text-slate-400">
+                            v2.4.0-stable
+                          </div>
+                        </div>
+
+                        <!-- Dashboard Right Panel (Main contents) -->
+                        <div class="flex-1 p-2.5 overflow-y-auto space-y-2.5">
+                          <!-- Content Header -->
+                          <div class="flex items-center justify-between">
+                            <div class="space-y-0.5">
+                              <h4 class="text-[10px] font-bold font-display text-white dark:text-white light:text-slate-850">Dashboard</h4>
+                              <p class="text-[7px] text-gray-500 dark:text-gray-500 light:text-slate-400">Live Workspace Diagnostics</p>
+                            </div>
+                            <div class="flex items-center gap-1 border border-white/5 dark:border-white/5 light:border-slate-200 rounded px-1.5 py-0.5 text-[7px] font-mono bg-white/5 dark:bg-white/5 light:bg-white text-gray-400 dark:text-gray-400 light:text-slate-600 shadow-sm">
+                              <span>This Year</span>
+                              <i data-lucide="chevron-down" class="w-2 h-2"></i>
+                            </div>
+                          </div>
+
+                          <!-- Metric Cards Grid -->
+                          <div class="grid grid-cols-4 gap-1.5">
+                            <div class="rounded-lg p-1.5 flex flex-col justify-between bg-[#0b0e25] dark:bg-[#0b0e25] light:bg-white border border-white/5 dark:border-white/5 light:border-slate-150 shadow-sm">
+                              <span class="text-[6px] uppercase tracking-wider text-gray-500 dark:text-gray-500 light:text-slate-400">Projects</span>
+                              <span class="text-[10px] font-bold mt-1 text-white dark:text-white light:text-slate-850">120+</span>
+                            </div>
+                            <div class="rounded-lg p-1.5 flex flex-col justify-between bg-[#0b0e25] dark:bg-[#0b0e25] light:bg-white border border-white/5 dark:border-white/5 light:border-slate-150 shadow-sm">
+                              <span class="text-[6px] uppercase tracking-wider text-gray-500 dark:text-gray-500 light:text-slate-400">Happy</span>
+                              <span class="text-[10px] font-bold mt-1 text-white dark:text-white light:text-slate-850">80+</span>
+                            </div>
+                            <div class="rounded-lg p-1.5 flex flex-col justify-between bg-[#0b0e25] dark:bg-[#0b0e25] light:bg-white border border-white/5 dark:border-white/5 light:border-slate-150 shadow-sm">
+                              <span class="text-[6px] uppercase tracking-wider text-gray-500 dark:text-gray-500 light:text-slate-400">Years</span>
+                              <span class="text-[10px] font-bold mt-1 text-white dark:text-white light:text-slate-850">10+</span>
+                            </div>
+                            <div class="rounded-lg p-1.5 flex flex-col justify-between bg-[#0b0e25] dark:bg-[#0b0e25] light:bg-white border border-white/5 dark:border-white/5 light:border-slate-150 shadow-sm">
+                              <span class="text-[6px] uppercase tracking-wider text-gray-500 dark:text-gray-500 light:text-slate-400">Countries</span>
+                              <span class="text-[10px] font-bold mt-1 text-white dark:text-white light:text-slate-850">15+</span>
+                            </div>
+                          </div>
+
+                          <!-- Chart Section and Satisfaction Circle -->
+                          <div class="grid grid-cols-3 gap-2">
+                            <!-- Realtime Analytics Line Graph -->
+                            <div class="col-span-2 rounded-lg p-2.5 flex flex-col justify-between relative overflow-hidden bg-[#0b0e25] dark:bg-[#0b0e25] light:bg-white border border-white/5 dark:border-white/5 light:border-slate-150 shadow-sm h-28">
+                              <div class="flex items-center justify-between z-10">
+                                <span class="text-[7px] font-semibold text-gray-400 dark:text-gray-400 light:text-slate-500">Project Analytics</span>
+                                <div class="flex items-center gap-1 font-mono text-[6px] text-brand-cyan dark:text-brand-cyan light:text-brand-blue">
+                                  <span class="w-1 h-1 rounded-full bg-brand-cyan dark:bg-brand-cyan light:bg-brand-blue animate-ping"></span>
+                                  <span>Active Tracking</span>
+                                </div>
+                              </div>
+                              <div class="flex-1 w-full mt-1 relative">
+                                <svg class="w-full h-full overflow-visible" id="laptop-analytics-svg" viewBox="0 0 280 80">
+                                  <!-- SVG path values will dynamically calculate on intervals inside main.js -->
+                                </svg>
+                              </div>
+                            </div>
+
+                            <!-- Satisfaction Dial Circle -->
+                            <div class="rounded-lg p-2.5 flex flex-col items-center justify-between text-center bg-[#0b0e25] dark:bg-[#0b0e25] light:bg-white border border-white/5 dark:border-white/5 light:border-slate-150 shadow-sm h-28 shrink-0">
+                              <span class="text-[7px] font-semibold block w-full text-left text-gray-400 dark:text-gray-400 light:text-slate-500">Satisfaction</span>
+                              <div class="relative w-14 h-14 flex items-center justify-center">
+                                <svg class="w-full h-full -rotate-90" viewBox="0 0 64 64">
+                                  <circle cx="32" cy="32" r="24" class="stroke-[4] fill-none stroke-white/5 dark:stroke-white/5 light:stroke-slate-100" />
+                                  <circle cx="32" cy="32" r="24" id="satisfaction-gauge-circle" class="stroke-[4.5] fill-none stroke-brand-cyan dark:stroke-brand-cyan light:stroke-brand-blue transition-all duration-1000" stroke-dasharray="150.8" stroke-dashoffset="1.5" stroke-linecap="round" />
+                                </svg>
+                                <div class="absolute inset-0 flex flex-col items-center justify-center">
+                                  <span id="satisfaction-percentage-text" class="text-[10px] font-bold font-display text-white dark:text-white light:text-slate-800">99%</span>
+                                  <span class="text-[4px] font-bold tracking-wider text-brand-cyan dark:text-brand-cyan light:text-brand-blue mt-0.5">SATISFIED</span>
+                                </div>
+                              </div>
+                              <div class="flex gap-2 justify-center text-[5px] text-gray-500 dark:text-gray-500 light:text-slate-450 mt-1">
+                                <div class="flex items-center gap-0.5">
+                                  <span class="w-1 h-1 rounded-full bg-brand-cyan dark:bg-brand-cyan light:bg-brand-blue"></span>
+                                  <span>Satisfied</span>
+                                </div>
+                                <div class="flex items-center gap-0.5">
+                                  <span class="w-1 h-1 rounded-full bg-brand-purple"></span>
+                                  <span>Repeat</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  <!-- [2] PHYSICAL LAPTOP HINGE (Heavy, definitive hinge piece) -->
+                  <div class="w-[35%] h-[9px] rounded-full z-10 -mb-[4px] bg-[#0c0d1b] dark:bg-[#0c0d1b] border border-white/5 dark:border-white/5 light:bg-slate-350 light:border-slate-300 shadow-inner"></div>
+
+                  <!-- [3] PHYSICAL LAPTOP DECK BASE (Strong metallic base plate with keyboard well) -->
+                  <div class="laptop-chassis-base w-[108%] h-[32%] rounded-b-2xl origin-top transition-all duration-300 relative bg-gradient-to-b from-[#1e2342] via-[#0c0e20] to-[#020308] dark:from-[#1e2342] dark:via-[#0c0e20] dark:to-[#020308] border-t border-white/10 dark:border-white/10 shadow-[0_30px_60px_rgba(0,0,0,0.85)] light:from-[#e2e8f0] light:via-[#f1f5f9] light:to-[#cbd5e1] light:border-t-white light:shadow-[0_22px_45px_rgba(15,23,42,0.15)] z-0">
+                    
+                    <!-- Tactile Keyboard Inset Basin -->
+                    <div class="w-[86%] h-[56%] mx-auto mt-2 rounded-md p-1 flex flex-col justify-between bg-black/35 dark:bg-black/35 light:bg-[#cbd5e1]/45 border border-white/5 dark:border-white/5 light:border-slate-300/65">
+                      <!-- Keyboard Rows -->
+                      <div class="keyboard-grid-keys space-y-[2px]">
+                        <!-- Dynamically populated rows inside main.js to keep DOM clean -->
+                      </div>
+                    </div>
+
+                    <!-- Multi-Touch Trackpad with click divisor line -->
+                    <div class="w-[24%] h-[22%] mx-auto mt-1 rounded-sm border bg-black/25 dark:bg-black/25 light:bg-slate-100/60 border-white/5 dark:border-white/5 light:border-slate-300/60 shadow-[inset_0_1px_2px_rgba(0,0,0,0.3)] dark:shadow-[inset_0_1px_2px_rgba(0,0,0,0.3)] light:shadow-[inset_0_1px_1.5px_rgba(0,0,0,0.06)]"></div>
+
+                    <!-- Beveled Front Grip Lip & Thickness Edge -->
+                    <div class="absolute bottom-0 left-0 right-0 h-[3.5px] rounded-b-2xl bg-[#020308] dark:bg-[#020308] light:bg-[#94a3b8] border-t border-white/5 dark:border-white/5 light:border-t-white/10"></div>
+                  </div>
+
+                </div>
+
+                <!-- [4] FLOATING MOBILE COMPANION APP (Vibrant overlay device) -->
+                <div class="mobile-device-wrapper absolute bottom-[10%] right-[10%] w-[24%] aspect-[0.52] rounded-[24px] p-[1.5px] overflow-hidden z-20 flex flex-col bg-gradient-to-b from-[#13172e] to-[#040614] dark:from-[#13172e] dark:to-[#040614] light:from-[#cbd5e1] light:to-[#94a3b8] shadow-[0_20px_45px_rgba(0,0,0,0.7)] dark:shadow-[0_20px_45px_rgba(0,0,0,0.7)] light:shadow-[0_15px_30px_rgba(15,23,42,0.12)] border border-white/10 dark:border-white/10 light:border-slate-300 transition-all duration-300">
+                  <div class="w-full h-full rounded-[23px] flex flex-col p-1.5 overflow-hidden relative bg-[#040510] dark:bg-[#040510] light:bg-white transition-all duration-300">
+                    
+                    <!-- Top Speaker / Notch -->
+                    <div class="w-full h-3 flex justify-center items-center relative">
+                      <div class="w-10 h-2 rounded-full absolute -top-1 border bg-black dark:bg-black light:bg-slate-800 border-white/5 dark:border-white/5 light:border-slate-200"></div>
+                    </div>
+
+                    <!-- Mobile Info Header -->
+                    <div class="flex justify-between items-center px-1 text-[6px] font-mono mt-0.5 text-gray-500 dark:text-gray-500 light:text-slate-400">
+                      <span>9:41</span>
+                      <div class="flex items-center gap-1">
+                        <span>5G</span>
+                        <span class="w-2.5 h-1.5 rounded-sm border border-gray-500 light:border-slate-350 bg-emerald-400 light:bg-emerald-500"></span>
+                      </div>
+                    </div>
+
+                    <!-- Welcome Copy -->
+                    <div class="px-1 mt-2.5 space-y-0.5 text-left rtl:text-right">
+                      <span class="text-[6px] uppercase tracking-wider block font-bold leading-none text-brand-cyan dark:text-brand-cyan light:text-brand-blue">OXA MOBILE</span>
+                      <h5 class="text-[8px] font-bold font-display leading-none mt-1 text-white dark:text-white light:text-slate-800">Welcome Back!</h5>
+                    </div>
+
+                    <!-- Dynamic Metrics Block -->
+                    <div class="space-y-1 mt-2.5 flex-1">
+                      <div class="rounded-lg p-1.5 flex flex-col gap-1 bg-[#0b0e25]/90 dark:bg-[#0b0e25]/90 light:bg-slate-50 border border-white/5 dark:border-white/5 light:border-slate-100 shadow-sm">
+                        <div class="flex items-center justify-between">
+                          <span class="text-[6.5px] font-medium text-gray-400 dark:text-gray-400 light:text-slate-500">In Progress</span>
+                          <span class="text-[8px] font-bold text-yellow-400 dark:text-yellow-400 light:text-amber-600">24</span>
+                        </div>
+                        <div class="w-full h-1 rounded-full overflow-hidden bg-white/5 dark:bg-white/5 light:bg-slate-200/50">
+                          <div class="h-full bg-gradient-to-r from-brand-purple to-brand-cyan" style="width: 65%;"></div>
+                        </div>
+                      </div>
+                      <div class="rounded-lg p-1.5 flex flex-col gap-1 bg-[#0b0e25]/90 dark:bg-[#0b0e25]/90 light:bg-slate-50 border border-white/5 dark:border-white/5 light:border-slate-100 shadow-sm">
+                        <div class="flex items-center justify-between">
+                          <span class="text-[6.5px] font-medium text-gray-400 dark:text-gray-400 light:text-slate-500">Completed</span>
+                          <span class="text-[8px] font-bold text-emerald-400 dark:text-emerald-400 light:text-emerald-600">18</span>
+                        </div>
+                        <div class="w-full h-1 rounded-full overflow-hidden bg-white/5 dark:bg-white/5 light:bg-slate-200/50">
+                          <div class="h-full bg-gradient-to-r from-brand-purple to-brand-cyan" style="width: 100%;"></div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Micro Sparkline -->
+                    <div class="h-8 w-full rounded-lg p-1 mt-2 relative overflow-hidden bg-[#080a1d] dark:bg-[#080a1d] light:bg-slate-50 border border-white/5 dark:border-white/5 light:border-slate-150">
+                      <span class="text-[5px] font-mono absolute top-1 left-1.5 text-gray-500 dark:text-gray-500 light:text-slate-400">LIVE SPEED</span>
+                      <svg class="w-full h-full overflow-visible mt-1" viewBox="0 0 100 20">
+                        <path d="M0,15 L15,12 L30,16 L45,8 L60,11 L75,4 L90,12 L100,6" fill="none" stroke="#00f0ff" stroke-width="1" class="light:stroke-[#4f46e5] transition-colors" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M0,15 L15,12 L30,16 L45,8 L60,11 L75,4 L90,12 L100,6 L100,20 L0,20 Z" fill="rgba(0, 240, 255, 0.15)" class="light:fill-[rgba(79,70,229,0.08)] transition-colors" />
+                      </svg>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- Dynamic Metrics Bar -->
+        <div id="metrics-bar" class="w-full max-w-7xl mx-auto px-6 mt-16 lg:mt-24">
+          <!-- Populated dynamically via JS -->
+        </div>
+
+        <!-- Solutions Navigator Preview Cards on Home -->
+        <div class="max-w-7xl mx-auto px-6 py-12">
+          <div class="text-center max-w-3xl mx-auto mb-12 space-y-3">
+            <h2 class="text-3xl md:text-4xl font-display font-extrabold text-brand-text mb-4" id="home-nav-title">Navigate Our Solutions</h2>
+            <p class="text-brand-muted text-sm md:text-base" id="home-nav-desc">Explore our full list of digital systems, bespoke software architecture, and active request hub.</p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Services Card Shortcut -->
+            <div id="card-services-shortcut" class="p-6 rounded-2xl bg-brand-card hover:bg-brand-card-hover border border-brand-border hover:border-brand-border-hover cursor-pointer group transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-md flex flex-col justify-between">
+              <div>
+                <div class="w-12 h-12 rounded-xl bg-brand-cyan/10 flex items-center justify-center text-brand-cyan mb-4 group-hover:scale-110 transition-transform">
+                  <i data-lucide="code" class="w-6 h-6"></i>
+                </div>
+                <h3 class="text-lg font-bold text-brand-text mb-2 font-display" id="short-services-title">Premium Services</h3>
+                <p class="text-xs text-brand-muted leading-relaxed mb-4" id="short-services-desc">From custom cloud-native apps to Gemini AI integration and mobile platform architecture.</p>
+              </div>
+              <span class="text-xs font-mono font-bold text-brand-cyan flex items-center gap-1.5 group-hover:translate-x-1.5 transition-transform duration-200">
+                <span id="short-services-cta">Explore Services</span>
+                <span>&rarr;</span>
+              </span>
+            </div>
+
+            <!-- Portfolio Card Shortcut -->
+            <div id="card-portfolio-shortcut" class="p-6 rounded-2xl bg-brand-card hover:bg-brand-card-hover border border-brand-border hover:border-brand-border-hover cursor-pointer group transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-md flex flex-col justify-between">
+              <div>
+                <div class="w-12 h-12 rounded-xl bg-brand-purple/10 flex items-center justify-center text-brand-purple mb-4 group-hover:scale-110 transition-transform">
+                  <i data-lucide="briefcase" class="w-6 h-6"></i>
+                </div>
+                <h3 class="text-lg font-bold text-brand-text mb-2 font-display" id="short-portfolio-title">Active Case Studies</h3>
+                <p class="text-xs text-brand-muted leading-relaxed mb-4" id="short-portfolio-desc">Inspect the production platforms and digital architecture we deployed with real-time analytics.</p>
+              </div>
+              <span class="text-xs font-mono font-bold text-brand-purple flex items-center gap-1.5 group-hover:translate-x-1.5 transition-transform duration-200">
+                <span id="short-portfolio-cta">Browse Portfolio</span>
+                <span>&rarr;</span>
+              </span>
+            </div>
+
+            <!-- Contact Card Shortcut -->
+            <div id="card-contact-shortcut" class="p-6 rounded-2xl bg-brand-card hover:bg-brand-card-hover border border-brand-border hover:border-brand-border-hover cursor-pointer group transition-all duration-300 hover:-translate-y-1 shadow-sm hover:shadow-md flex flex-col justify-between">
+              <div>
+                <div class="w-12 h-12 rounded-xl bg-brand-blue/10 flex items-center justify-center text-brand-blue mb-4 group-hover:scale-110 transition-transform">
+                  <i data-lucide="message-square" class="w-6 h-6"></i>
+                </div>
+                <h3 class="text-lg font-bold text-brand-text mb-2 font-display" id="short-contact-title">Client Hub & Contact</h3>
+                <p class="text-xs text-brand-muted leading-relaxed mb-4" id="short-contact-desc">Submit custom requests, track estimates, and launch direct chats with our systems engineers.</p>
+              </div>
+              <span class="text-xs font-mono font-bold text-brand-blue flex items-center gap-1.5 group-hover:translate-x-1.5 transition-transform duration-200">
+                <span id="short-contact-cta">Open Contact Portal</span>
+                <span>&rarr;</span>
+              </span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ================= PAGE 2: SERVICES ================= -->
+      <div id="page-services" class="page-view hidden space-y-6">
+        <section class="relative py-20 lg:py-28 overflow-hidden">
+          <!-- Backlights -->
+          <div class="absolute top-1/4 right-0 w-80 h-80 bg-brand-purple/10 rounded-full blur-[100px] pointer-events-none"></div>
+          <div class="absolute bottom-1/4 left-0 w-80 h-80 bg-brand-cyan/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+          <div class="max-w-7xl mx-auto px-6">
+            <!-- Header -->
+            <div class="text-center max-w-3xl mx-auto mb-16 lg:mb-20 space-y-3">
+              <span class="text-xs lg:text-sm font-bold font-mono text-brand-cyan tracking-[0.2em] uppercase block" data-t="servicesSub">OUR SERVICES</span>
+              <h2 class="text-3xl lg:text-5xl font-display font-bold text-brand-text tracking-tight leading-tight" data-t="servicesTitle">Complete Digital Solutions</h2>
+              <p class="text-base lg:text-lg text-brand-muted" data-t="servicesDesc">End-to-end services to help your business grow in the digital world.</p>
+            </div>
+
+            <!-- Dynamic Services Grid -->
+            <div id="services-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+        </section>
+
+        <!-- Process Timeline Component inside Services -->
+        <section id="process-timeline-section" class="relative py-20 lg:py-28 bg-brand-secondary overflow-hidden border-t border-b border-brand-border transition-colors duration-300">
+          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[60%] bg-brand-purple/5 rounded-full blur-[130px] pointer-events-none"></div>
+          
+          <div class="max-w-7xl mx-auto px-6">
+            <!-- Header -->
+            <div class="mb-16 lg:mb-24 text-center lg:text-left flex flex-col lg:flex-row items-center lg:items-end justify-between gap-6">
+              <div class="space-y-3">
+                <span class="text-xs lg:text-sm font-bold font-mono text-brand-cyan tracking-[0.2em] uppercase block" data-t="processSub">OUR PROCESS</span>
+                <h2 class="text-3xl lg:text-5xl font-display font-bold text-brand-text tracking-tight leading-tight" data-t="processTitle">From Idea to Success</h2>
+              </div>
+              <div class="flex gap-2.5 text-xs font-mono font-bold text-brand-dim">
+                <span class="text-brand-cyan">01. SCOPING</span>
+                <span>&bull;</span>
+                <span class="text-brand-purple">02. PRODUCTION</span>
+                <span>&bull;</span>
+                <span class="text-emerald-500">03. SCALE</span>
+              </div>
+            </div>
+
+            <!-- Timeline Frame -->
+            <div class="relative">
+              <!-- Connecting glow line (desktop only) -->
+              <div class="hidden lg:block absolute top-[44px] left-[8%] right-[8%] h-[2px] bg-brand-border opacity-60"></div>
+              
+              <div id="timeline-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 lg:gap-6 relative">
+                <!-- Rendered via JS -->
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- ================= PAGE 3: PORTFOLIO ================= -->
+      <div id="page-portfolio" class="page-view hidden">
+        <section class="py-20 lg:py-28 relative">
+          <div class="absolute top-[10%] left-0 w-80 h-80 bg-brand-cyan/5 rounded-full blur-[90px] pointer-events-none"></div>
+          <div class="absolute bottom-[10%] right-0 w-80 h-80 bg-brand-purple/5 rounded-full blur-[90px] pointer-events-none"></div>
+
+          <div class="max-w-7xl mx-auto px-6">
+            <!-- Header -->
+            <div class="text-center max-w-3xl mx-auto mb-12 lg:mb-16 space-y-3">
+              <span class="text-xs lg:text-sm font-bold font-mono text-brand-cyan tracking-[0.2em] uppercase block" data-t="portfolioSub">OUR WORK</span>
+              <h2 class="text-3xl lg:text-5xl font-display font-bold text-brand-text tracking-tight leading-tight" data-t="portfolioTitle">Innovations We've Brought to Life</h2>
+              <p class="text-base lg:text-lg text-brand-muted" data-t="portfolioDesc">Browse our latest digital creations built for forward-thinking brands.</p>
+            </div>
+
+            <!-- Dynamic Category Filter Tabs -->
+            <div id="portfolio-tabs" class="flex flex-wrap items-center justify-center gap-2 mb-12">
+              <!-- Rendered via JS -->
+            </div>
+
+            <!-- Dynamic Portfolio Grid -->
+            <div id="portfolio-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- ================= PAGE 4: ABOUT US ================= -->
+      <div id="page-about" class="page-view hidden">
+        <section class="py-20 lg:py-28 relative">
+          <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(112,0,255,0.03),transparent_60%)] pointer-events-none"></div>
+
+          <div class="max-w-7xl mx-auto px-6">
+            
+            <!-- About Top Row Block -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center mb-20 lg:mb-28">
+              <div class="lg:col-span-7 space-y-6 text-center lg:text-left rtl:lg:text-right">
+                <span class="text-xs lg:text-sm font-bold font-mono text-brand-cyan tracking-[0.2em] uppercase block" data-t="aboutSub">ABOUT US</span>
+                <h2 class="text-3xl lg:text-5xl font-display font-bold text-brand-text tracking-tight leading-tight" data-t="aboutTitle">We Are Pioneers in Digital Craftsmanship</h2>
+                <p class="text-base lg:text-lg text-brand-muted leading-relaxed" data-t="aboutDesc">At Oxa Code, we blend engineering excellence with visual artistry to build software that creates lasting impact.</p>
+
+                <!-- Small stats counter box -->
+                <div class="grid grid-cols-3 gap-4 pt-4" id="about-stats-panel">
+                  <!-- Generated via JS -->
+                </div>
+              </div>
+
+              <!-- Interactive Tech Stack Card -->
+              <div class="lg:col-span-5 bg-brand-secondary border border-brand-border rounded-2xl p-6 lg:p-8 shadow-2xl relative overflow-hidden group">
+                <div class="absolute top-0 right-0 w-36 h-36 bg-brand-purple/10 rounded-full blur-[40px] group-hover:bg-brand-purple/20 transition-all duration-300 pointer-events-none"></div>
+                <h3 class="text-lg font-display font-bold text-brand-text tracking-tight mb-6 flex items-center gap-2 rtl:flex-row-reverse">
+                  <i data-lucide="cpu" class="w-5 h-5 text-brand-cyan animate-pulse"></i>
+                  <span data-t="techStack">Tech Stack & Ecosystem</span>
+                </h3>
+                <div id="tech-stack-list" class="space-y-4">
+                  <!-- Rendered via JS -->
+                </div>
+              </div>
+            </div>
+
+            <!-- Core Values -->
+            <div class="space-y-10">
+              <h3 class="text-2xl font-display font-bold text-brand-text tracking-tight text-center" data-t="aboutValuesTitle">Our Core Values</h3>
+              <div id="values-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+                <!-- Rendered via JS -->
+              </div>
+            </div>
+
+          </div>
+        </section>
+      </div>
+
+      <!-- ================= PAGE 5: CONTACT ================= -->
+      <div id="page-contact" class="page-view hidden">
+        <section class="py-20 lg:py-28 relative">
+          <div class="absolute top-1/4 left-1/4 w-80 h-80 bg-brand-cyan/5 rounded-full blur-[100px] pointer-events-none"></div>
+          <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-brand-purple/5 rounded-full blur-[100px] pointer-events-none"></div>
+
+          <div class="max-w-7xl mx-auto px-6">
+            <!-- Header -->
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+              <span class="text-xs lg:text-sm font-bold font-mono text-brand-cyan tracking-[0.2em] uppercase block" data-t="contactSub">GET IN TOUCH</span>
+              <h2 class="text-3xl lg:text-5xl font-display font-bold text-brand-text tracking-tight leading-tight" data-t="contactTitle">Let's Build Something Great</h2>
+              <p class="text-base lg:text-lg text-brand-muted" data-t="contactDesc">Have an ambitious project in mind? Let's connect and design the future together.</p>
+            </div>
+
+            <!-- Grid: info list & actual form -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+              
+              <!-- Column 1: Info Cards -->
+              <div class="lg:col-span-5 space-y-6">
+                <!-- Callout badge -->
+                <div class="bg-gradient-to-r from-brand-purple/10 to-brand-cyan/10 border border-brand-border rounded-2xl p-6 space-y-4 shadow-sm">
+                  <span class="flex items-center gap-2 text-xs font-bold font-mono text-brand-cyan uppercase">
+                    <i data-lucide="sparkles" class="w-4 h-4 text-brand-cyan animate-spin-slow"></i>
+                    <span id="response-guarantee-title">SUB-SECOND RESPONSE GUARANTEE</span>
+                  </span>
+                  <p class="text-xs md:text-sm text-brand-muted leading-relaxed" id="response-guarantee-desc">
+                    Every submission triggers an instant team review. Expect an executive brief, tech stack map, and custom pricing proposal in under 24 hours.
+                  </p>
+                </div>
+
+                <!-- Email address card -->
+                <div class="glass-card rounded-2xl p-6 border border-brand-border flex items-center justify-between group shadow-sm hover:shadow-md transition-shadow">
+                  <div class="flex items-center gap-4">
+                    <div class="w-11 h-11 rounded-xl bg-brand-cyan/10 border border-brand-cyan/20 flex items-center justify-center text-brand-cyan shrink-0">
+                      <i data-lucide="mail" class="w-5 h-5"></i>
+                    </div>
+                    <div class="text-left rtl:text-right">
+                      <span class="text-xs text-brand-dim block uppercase font-mono" id="email-card-sub">Email Us</span>
+                      <span class="text-sm font-semibold text-brand-text mt-1 block">hello@oxacode.com</span>
+                    </div>
+                  </div>
+                  <button id="btn-copy-email" class="w-8 h-8 rounded-lg bg-brand-card hover:bg-brand-card-hover border border-brand-border flex items-center justify-center text-brand-muted hover:text-brand-text transition-all cursor-pointer">
+                    <i data-lucide="copy" class="w-4 h-4" id="copy-email-icon"></i>
+                  </button>
+                </div>
+
+                <!-- Location card -->
+                <div class="glass-card rounded-2xl p-6 border border-brand-border flex items-center gap-4 shadow-sm">
+                  <div class="w-11 h-11 rounded-xl bg-brand-purple/10 border border-brand-purple/20 flex items-center justify-center text-brand-purple shrink-0">
+                    <i data-lucide="map-pin" class="w-5 h-5"></i>
+                  </div>
+                  <div class="text-left rtl:text-right">
+                    <span class="text-xs text-brand-dim block uppercase font-mono" id="location-card-sub">Global Office</span>
+                    <span class="text-sm font-semibold text-brand-text mt-1 block" id="location-card-title">London, United Kingdom & Remote</span>
+                  </div>
+                </div>
+
+                <!-- CRM Lead portal pipeline toggler -->
+                <button id="crm-toggle" class="w-full py-4 px-5 rounded-2xl border border-dashed border-brand-border hover:border-brand-cyan bg-brand-card hover:bg-brand-card-hover flex items-center justify-between text-xs font-bold text-brand-text hover:text-brand-cyan transition-all cursor-pointer font-mono shadow-sm">
+                  <span class="flex items-center gap-2.5">
+                    <i data-lucide="database" class="w-4 h-4 text-brand-cyan animate-pulse"></i>
+                    <span id="crm-headline">CLIENT PORTAL (ACTIVE REQUESTS)</span>
+                  </span>
+                  <div class="flex items-center gap-1.5">
+                    <span class="text-[10px] bg-brand-cyan/15 text-brand-cyan px-2 py-0.5 rounded-full font-bold" id="crm-view-label">VIEW PIPELINE</span>
+                    <i data-lucide="chevron-right" id="crm-chevron" class="w-4 h-4 transition-transform"></i>
+                  </div>
+                </button>
+              </div>
+
+              <!-- Column 2: CRM Form Container -->
+              <div class="lg:col-span-7 bg-brand-secondary border border-brand-border rounded-3xl p-6 md:p-10 shadow-2xl relative overflow-hidden">
+                <div class="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-brand-purple to-transparent"></div>
+                
+                <form id="contact-form-node" class="space-y-6">
+                  <!-- Name & Email -->
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-2">
+                      <label class="text-xs font-bold font-mono text-brand-dim uppercase block">
+                        <span data-t="nameLabel">Your Name</span> <span class="text-brand-cyan">*</span>
+                      </label>
+                      <input type="text" id="contact-name" required class="w-full bg-brand-card border border-brand-border focus:border-brand-cyan focus:ring-1 focus:ring-brand-cyan rounded-xl px-4 py-3 text-sm text-brand-text placeholder-brand-dim focus:outline-none transition-colors" placeholder="John Doe" />
+                    </div>
+                    <div class="space-y-2">
+                      <label class="text-xs font-bold font-mono text-brand-dim uppercase block">
+                        <span data-t="emailLabel">Email Address</span> <span class="text-brand-cyan">*</span>
+                      </label>
+                      <input type="email" id="contact-email" required class="w-full bg-brand-card border border-brand-border focus:border-brand-cyan focus:ring-1 focus:ring-brand-cyan rounded-xl px-4 py-3 text-sm text-brand-text placeholder-brand-dim focus:outline-none transition-colors" placeholder="john@example.com" />
+                    </div>
+                  </div>
+
+                  <!-- Company -->
+                  <div class="space-y-2">
+                    <label class="text-xs font-bold font-mono text-brand-dim uppercase block" data-t="companyLabel">Company Name (Optional)</label>
+                    <input type="text" id="contact-company" class="w-full bg-brand-card border border-brand-border focus:border-brand-cyan focus:ring-1 focus:ring-brand-cyan rounded-xl px-4 py-3 text-sm text-brand-text placeholder-brand-dim focus:outline-none transition-colors" placeholder="Acme Corp" />
+                  </div>
+
+                  <!-- Multiselect Service Needed -->
+                  <div class="space-y-3">
+                    <label class="text-xs font-bold font-mono text-brand-dim uppercase block" data-t="selectServices">Select Services Needed</label>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5" id="contact-services-selector">
+                      <!-- Rendered via JS -->
+                    </div>
+                  </div>
+
+                  <!-- Budget Selector buttons -->
+                  <div class="space-y-2">
+                    <label class="text-xs font-bold font-mono text-brand-dim uppercase block" data-t="budgetLabel">Estimated Budget</label>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-2.5" id="contact-budget-selector">
+                      <button type="button" data-budget-id="under-10k" class="px-3 py-2.5 rounded-xl border text-xs font-mono font-bold transition-all text-center cursor-pointer bg-brand-card border-brand-border text-brand-muted hover:text-brand-text">$5k - $10k</button>
+                      <button type="button" data-budget-id="10k-25k" class="px-3 py-2.5 rounded-xl border text-xs font-mono font-bold transition-all text-center cursor-pointer bg-gradient-to-r from-brand-purple/15 to-brand-cyan/15 border-brand-cyan text-brand-text shadow-[0_0_15px_rgba(0,240,255,0.1)]">10k-25k</button>
+                      <button type="button" data-budget-id="25k-50k" class="px-3 py-2.5 rounded-xl border text-xs font-mono font-bold transition-all text-center cursor-pointer bg-brand-card border-brand-border text-brand-muted hover:text-brand-text">$25k - $50k</button>
+                      <button type="button" data-budget-id="above-50k" class="px-3 py-2.5 rounded-xl border text-xs font-mono font-bold transition-all text-center cursor-pointer bg-brand-card border-brand-border text-brand-muted hover:text-brand-text">$50k+</button>
+                    </div>
+                  </div>
+
+                  <!-- Details -->
+                  <div class="space-y-2">
+                    <label class="text-xs font-bold font-mono text-brand-dim uppercase block">
+                      <span data-t="messageLabel">Project Details / Message</span> <span class="text-brand-cyan">*</span>
+                    </label>
+                    <textarea id="contact-message" required rows="4" class="w-full bg-brand-card border border-brand-border focus:border-brand-cyan focus:ring-1 focus:ring-brand-cyan rounded-xl px-4 py-3 text-sm text-brand-text placeholder-brand-dim focus:outline-none transition-colors resize-none" placeholder="Describe features, timeline, and core goals..."></textarea>
+                  </div>
+
+                  <!-- Submit -->
+                  <button type="submit" id="contact-submit-btn" class="w-full py-4 rounded-xl bg-gradient-to-r from-brand-purple to-brand-blue text-sm font-semibold text-white shadow-lg shadow-brand-purple/25 flex items-center justify-center gap-2 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 cursor-pointer">
+                    <i data-lucide="send" class="w-4 h-4"></i>
+                    <span data-t="submitBtn">Send Message</span>
+                  </button>
+                </form>
+
+                <!-- Success Box -->
+                <div id="contact-success-screen" class="py-12 flex flex-col items-center text-center space-y-6 hidden">
+                  <div class="w-16 h-16 rounded-full bg-emerald-500/10 border-2 border-emerald-400/20 flex items-center justify-center text-emerald-500 shadow-[0_0_20px_rgba(16,185,129,0.2)]">
+                    <i data-lucide="check" class="w-8 h-8 animate-pulse"></i>
+                  </div>
+                  <div class="space-y-2.5 max-w-md mx-auto">
+                    <h3 class="text-2xl font-display font-bold text-brand-text tracking-tight" id="success-header-t">Inquiry Transmitted!</h3>
+                    <p class="text-sm text-brand-muted leading-relaxed" data-t="successMsg">Thank you! We've received your request and will contact you within 24 hours.</p>
+                  </div>
+                  <button id="btn-reset-contact" class="px-6 py-2.5 rounded-xl bg-brand-card hover:bg-brand-card-hover border border-brand-border text-sm font-semibold text-brand-muted hover:text-brand-text transition-all cursor-pointer">Submit Another Inquiry</button>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- CRM Leads Pipeline Viewer Panel Drawer -->
+            <div id="crm-leads-pipeline" class="mt-12 bg-brand-secondary border border-brand-border rounded-2xl p-6 shadow-2xl space-y-4 hidden">
+              <div class="flex items-center justify-between border-b border-brand-border pb-4">
+                <div class="flex items-center gap-2.5">
+                  <i data-lucide="database" class="w-5 h-5 text-brand-cyan animate-pulse"></i>
+                  <h4 class="text-sm font-bold font-mono text-brand-text tracking-wider" data-t="leadsViewer">CLIENT PORTAL & SUBMISSIONS</h4>
+                </div>
+                <span class="text-[10px] bg-brand-cyan/15 border border-brand-cyan/25 text-brand-cyan px-2 py-0.5 rounded-full font-mono font-bold" id="crm-total-badge">1 ACTIVE LEAD</span>
+              </div>
+              <div id="crm-leads-list" class="space-y-4 max-h-96 overflow-y-auto pr-1">
+                <!-- Logged leads are loaded here dynamically via JS -->
+              </div>
+            </div>
+
+          </div>
+        </section>
+      </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-brand-secondary border-t border-brand-border py-12 relative overflow-hidden transition-colors duration-300">
+      <div class="absolute bottom-0 right-10 w-48 h-48 bg-brand-purple/5 rounded-full blur-[50px] pointer-events-none"></div>
+      
+      <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-8 relative z-10">
+        <!-- Identity -->
+        <div class="flex flex-col items-center md:items-start text-center md:text-left gap-2">
+          <a href="#oxa-header" class="flex items-center gap-2.5 group scroll-top-trigger">
+            <div class="relative w-[60px] h-[34px] group">
+              <!-- Inline mini SVG logo -->
+              <svg viewBox="0 0 170 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full drop-shadow-[0_4px_15px_rgba(0,240,255,0.2)]">
+                <circle cx="60" cy="50" r="26" stroke="url(#lhRingGrad)" stroke-width="11.5" fill="none" />
+                <path d="M 128.38 31.62 A 26 26 0 1 0 128.38 68.38" stroke="url(#rhRingGrad)" stroke-width="11.5" fill="none" stroke-linecap="round" />
+                <path d="M 76.61 30 A 26 26 0 0 1 85.69 46" stroke="url(#lhRingGrad)" stroke-width="11.5" fill="none" stroke-linecap="round" />
+              </svg>
+            </div>
+            <span class="font-display font-bold text-white tracking-wide text-base">OXA CODE</span>
+          </a>
+          <p class="text-xs text-brand-dim mt-2 max-w-xs md:max-w-sm" id="footer-bio-desc">
+            Premium full-stack software development agency creating robust, auto-scaling platforms.
+          </p>
+        </div>
+
+        <!-- Social and copyright link lists -->
+        <div class="flex flex-col items-center md:items-end gap-3 text-center md:text-right">
+          <div class="flex items-center gap-3.5">
+            <a href="#" class="w-8 h-8 rounded-full bg-brand-card hover:bg-brand-card-hover border border-brand-border hover:border-brand-border-hover flex items-center justify-center text-brand-muted hover:text-brand-text transition-all shadow-sm"><i data-lucide="github" class="w-4 h-4"></i></a>
+            <a href="#" class="w-8 h-8 rounded-full bg-brand-card hover:bg-brand-card-hover border border-brand-border hover:border-brand-border-hover flex items-center justify-center text-brand-muted hover:text-brand-text transition-all shadow-sm"><i data-lucide="twitter" class="w-4 h-4"></i></a>
+            <a href="#" class="w-8 h-8 rounded-full bg-brand-card hover:bg-brand-card-hover border border-brand-border hover:border-brand-border-hover flex items-center justify-center text-brand-muted hover:text-brand-text transition-all shadow-sm"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
+          </div>
+          <div class="text-xs text-brand-dim mt-1 font-mono">
+            <span data-t="footerText">© 2026 Oxa Code. All rights reserved. Crafting infinite software solutions.</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- ================= MODAL DRAWER 1: PROJECT CONFIGURATOR (WIZARD) ================= -->
+    <div id="wizard-backdrop" class="fixed inset-0 bg-black/70 z-50 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300"></div>
+    <div id="wizard-modal" class="fixed inset-y-4 inset-x-4 md:inset-y-10 md:max-w-4xl md:mx-auto bg-brand-secondary border border-brand-border rounded-3xl overflow-hidden shadow-2xl z-50 flex flex-col md:flex-row hidden translate-y-8 opacity-0 transition-all duration-300">
+      
+      <!-- Column 1: Configurator Content Step Panel -->
+      <div class="flex-1 p-6 md:p-10 flex flex-col justify-between overflow-y-auto bg-brand-secondary">
+        
+        <!-- Header -->
+        <div class="flex items-center justify-between border-b border-brand-border pb-5">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-xl bg-brand-cyan/15 border border-brand-cyan/25 flex items-center justify-center text-brand-cyan shadow-md shadow-brand-cyan/10">
+              <i data-lucide="calculator" class="w-5 h-5 animate-pulse"></i>
+            </div>
+            <div>
+              <h3 class="text-lg md:text-xl font-display font-bold text-brand-text leading-none" data-t="wizardTitle">Project Configurator</h3>
+              <p class="text-xs text-brand-dim mt-1.5 leading-none" data-t="wizardDesc">Estimate your project budget & scope in real-time.</p>
+            </div>
+          </div>
+          <button id="wizard-close-btn" class="w-8 h-8 rounded-full bg-brand-card hover:bg-brand-card-hover border border-brand-border flex items-center justify-center text-brand-muted hover:text-brand-text transition-colors cursor-pointer">
+            <i data-lucide="x" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+        <!-- Changing Steps Area -->
+        <div class="flex-1 py-6 md:py-8 min-h-[300px]">
+          
+          <!-- Step 1: Services Selector -->
+          <div id="wizard-step-1" class="wizard-step space-y-4">
+            <h4 class="text-sm font-bold font-mono text-brand-cyan uppercase tracking-wider" id="wizard-step-1-title">STEP 1: CHOOSE SYSTEM SERVICES</h4>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="wizard-services-selector-grid">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+
+          <!-- Step 2: Feature Scope -->
+          <div id="wizard-step-2" class="wizard-step space-y-4 hidden">
+            <h4 class="text-sm font-bold font-mono text-brand-cyan uppercase tracking-wider" id="wizard-step-2-title">STEP 2: ENHANCED INTEGRATIONS</h4>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="wizard-features-selector-grid">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+
+          <!-- Step 3: Contacts & Complete -->
+          <div id="wizard-step-3" class="wizard-step space-y-4 hidden">
+            <h4 class="text-sm font-bold font-mono text-brand-cyan uppercase tracking-wider" id="wizard-step-3-title">STEP 3: CONTACT INFORMATION</h4>
+            
+            <div id="wizard-form-fields" class="space-y-4">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="space-y-1.5">
+                  <label class="text-[10px] font-bold font-mono text-brand-dim uppercase block" data-t="nameLabel">Your Name</label>
+                  <input type="text" id="wizard-name" required class="w-full bg-brand-card border border-brand-border focus:border-brand-cyan rounded-xl px-4 py-3 text-sm text-brand-text focus:outline-none transition-colors" placeholder="John Doe" />
+                </div>
+                <div class="space-y-1.5">
+                  <label class="text-[10px] font-bold font-mono text-brand-dim uppercase block" data-t="emailLabel">Email Address</label>
+                  <input type="email" id="wizard-email" required class="w-full bg-brand-card border border-brand-border focus:border-brand-cyan rounded-xl px-4 py-3 text-sm text-brand-text focus:outline-none transition-colors" placeholder="john@example.com" />
+                </div>
+              </div>
+              <div class="space-y-1.5">
+                <label class="text-[10px] font-bold font-mono text-brand-dim uppercase block" id="wizard-reqs-label">Project Requirements</label>
+                <textarea id="wizard-message" required rows="3" class="w-full bg-brand-card border border-brand-border focus:border-brand-cyan rounded-xl px-4 py-3 text-sm text-brand-text focus:outline-none transition-colors resize-none" placeholder="Include timeline constraints, desired integrations, or scaling requirements..."></textarea>
+              </div>
+            </div>
+
+            <!-- Success screen state inside step 3 -->
+            <div id="wizard-success-screen" class="py-10 flex flex-col items-center text-center space-y-4 hidden">
+              <div class="w-14 h-14 rounded-full bg-emerald-500/10 border border-emerald-400/20 flex items-center justify-center text-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.2)]">
+                <i data-lucide="check" class="w-6 h-6 animate-pulse"></i>
+              </div>
+              <div>
+                <h5 class="text-base font-bold text-brand-text" id="wizard-success-title">Project Configuration Transmitted!</h5>
+                <p class="text-xs text-brand-muted mt-1 leading-relaxed" id="wizard-success-desc">
+                  We have received your custom wizard structure and will evaluate it. Standby for contact!
+                </p>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Navigation Footer Controls of Wizard -->
+        <div id="wizard-footer-nav" class="border-t border-brand-border pt-5 flex items-center justify-between mt-4">
+          <button id="wizard-back-btn" class="flex items-center gap-1.5 text-xs font-semibold text-brand-dim hover:text-brand-text transition-colors disabled:opacity-20 cursor-pointer" disabled>
+            <i data-lucide="arrow-left" class="w-4 h-4 rtl:rotate-180"></i>
+            <span data-t="wizardBack">Previous Step</span>
+          </button>
+
+          <!-- Step Indicators dots -->
+          <div class="flex gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-brand-cyan transition-colors" data-step-indicator="1"></span>
+            <span class="w-1.5 h-1.5 rounded-full bg-brand-border transition-colors" data-step-indicator="2"></span>
+            <span class="w-1.5 h-1.5 rounded-full bg-brand-border transition-colors" data-step-indicator="3"></span>
+          </div>
+
+          <button id="wizard-next-btn" class="flex items-center gap-1.5 text-xs font-bold text-brand-cyan hover:text-brand-text bg-brand-cyan/5 hover:bg-gradient-to-r hover:from-brand-purple hover:to-brand-blue hover:text-white px-4 py-2 border border-brand-cyan/25 hover:border-transparent rounded-lg transition-all cursor-pointer">
+            <span id="wizard-next-label" data-t="wizardNext">Next Step</span>
+            <i data-lucide="arrow-right" class="w-4 h-4 rtl:rotate-180" id="wizard-next-arrow"></i>
+            <i data-lucide="send" class="w-4 h-4 hidden" id="wizard-submit-icon"></i>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Column 2: Live Real-Time Budgeting Ledger Panel (Side sheet) -->
+      <div class="w-full md:w-[320px] border-t md:border-t-0 md:border-l border-brand-border p-6 md:p-8 flex flex-col justify-between bg-brand-card backdrop-blur-md relative">
+        <div class="absolute inset-0 bg-mesh pointer-events-none opacity-30 z-0"></div>
+        
+        <div class="space-y-6 relative z-10">
+          <span class="text-[10px] font-bold font-mono tracking-[0.2em] text-brand-cyan block uppercase" id="ledger-headline">REAL-TIME ARCHITECTURE SCOPE</span>
+          
+          <div class="space-y-4">
+            <div>
+              <span class="text-xs text-brand-muted block font-medium" data-t="estimatedCost">Estimated Development Range</span>
+              <span id="wizard-estimated-cost-text" class="text-2xl md:text-3xl font-display font-extrabold text-brand-cyan block tracking-tight mt-1 animate-pulse">$0 - $0</span>
+            </div>
+            
+            <div class="border-t border-brand-border/60 pt-4">
+              <span class="text-xs text-brand-muted block font-medium" data-t="timelineLabel">Project Timeline</span>
+              <span id="wizard-estimated-timeline-text" class="text-xl font-display font-bold text-brand-purple block tracking-tight mt-1">0 weeks</span>
+            </div>
+          </div>
+
+          <!-- Dynamic selected components checklist summary -->
+          <div class="border-t border-brand-border/60 pt-4 space-y-2">
+            <span class="text-[9px] font-bold font-mono text-brand-dim uppercase block" id="components-summary-headline">SYSTEM BLOCKS CHECKLIST</span>
+            <div id="wizard-ledger-checklist" class="space-y-1.5 max-h-44 overflow-y-auto">
+              <!-- Dynamically logged selections -->
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-6 relative z-10 hidden md:block">
+          <div class="bg-brand-secondary/50 border border-brand-border/50 rounded-xl p-3 text-[10px] text-brand-dim leading-normal flex items-start gap-2">
+            <i data-lucide="shield-check" class="w-4 h-4 text-brand-cyan shrink-0"></i>
+            <span id="wizard-security-guarantee-desc">Oxa Code architectures feature 100% full encryption backups, responsive monitoring systems, and 24-month technical warranties.</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ================= MODAL DRAWER 2: SERVICE DETAIL DRAWER ================= -->
+    <div id="service-modal-backdrop" class="fixed inset-0 bg-black/70 z-50 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300"></div>
+    <div id="service-modal" class="fixed inset-y-6 inset-x-4 md:inset-y-12 md:max-w-3xl md:mx-auto bg-brand-secondary border border-brand-border rounded-3xl p-6 md:p-10 shadow-2xl z-50 flex flex-col justify-between overflow-y-auto hidden translate-y-8 opacity-0 transition-all duration-300">
+      <div>
+        <!-- Modal header -->
+        <div class="flex justify-between items-start border-b border-brand-border pb-6">
+          <div class="flex items-center gap-4">
+            <div id="service-modal-icon-bg" class="w-12 h-12 rounded-xl border flex items-center justify-center text-brand-cyan">
+              <i data-lucide="code" class="w-6 h-6" id="service-modal-icon"></i>
+            </div>
+            <div>
+              <h3 id="service-modal-title" class="text-xl md:text-2xl font-display font-bold text-brand-text tracking-tight">Service Specification</h3>
+              <span class="text-xs text-brand-cyan font-mono tracking-wider block mt-0.5">SERVICE SPECIFICATION</span>
+            </div>
+          </div>
+          <button id="service-modal-close-btn" class="w-8 h-8 rounded-full bg-brand-card hover:bg-brand-card-hover border border-brand-border flex items-center justify-center text-brand-muted hover:text-brand-text transition-colors cursor-pointer">
+            <i data-lucide="x" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+        <!-- Detail Specification Description and Features list -->
+        <div class="py-6 md:py-8 space-y-6">
+          <p id="service-modal-description" class="text-sm md:text-base text-brand-text leading-relaxed">
+            Detailed specifications are loading...
+          </p>
+          
+          <div class="space-y-4">
+            <h4 class="text-sm font-bold font-mono text-brand-cyan uppercase tracking-wider" id="deliverables-headline-t">What We Deliver:</h4>
+            <div id="service-modal-deliverables" class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Footer buttons -->
+      <div class="border-t border-brand-border pt-6 flex flex-col md:flex-row items-center justify-end gap-4 mt-6 shrink-0">
+        <button id="service-modal-cancel-btn" class="w-full md:w-auto px-6 py-2.5 rounded-xl border border-brand-border hover:border-brand-border-hover text-sm font-semibold text-brand-muted hover:text-brand-text transition-colors">Close Specification</button>
+        <button id="service-modal-cta-btn" class="w-full md:w-auto px-6 py-2.5 rounded-xl bg-gradient-to-r from-brand-purple to-brand-blue text-sm font-semibold text-white shadow-lg flex items-center justify-center gap-2 hover:-translate-y-0.5 transition-transform cursor-pointer">
+          <span data-t="startProject">Start Your Project</span>
+          <i data-lucide="arrow-right" class="w-4 h-4 rtl:rotate-180"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- ================= MODAL DRAWER 3: PORTFOLIO DETAIL DRAWER ================= -->
+    <div id="portfolio-modal-backdrop" class="fixed inset-0 bg-black/70 z-50 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300"></div>
+    <div id="portfolio-modal" class="fixed inset-y-6 inset-x-4 md:inset-y-12 md:max-w-3xl md:mx-auto bg-brand-secondary border border-brand-border rounded-3xl overflow-hidden shadow-2xl z-50 flex flex-col justify-between hidden translate-y-8 opacity-0 transition-all duration-300">
+      
+      <!-- Top banner image -->
+      <div class="relative h-60 md:h-72 w-full bg-slate-950 overflow-hidden shrink-0">
+        <img id="portfolio-modal-image" src="" alt="Portfolio Showcase" class="w-full h-full object-cover" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/30 to-transparent"></div>
+        
+        <button id="portfolio-modal-close-btn" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-950/80 border border-white/10 flex items-center justify-center text-white/70 hover:text-white hover:bg-slate-950 transition-colors z-20 cursor-pointer">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+
+        <!-- Dynamic overlaid titles -->
+        <div class="absolute bottom-6 left-6 right-6 text-left rtl:text-right">
+          <span id="portfolio-modal-category-badge" class="text-[10px] font-mono font-bold uppercase tracking-wider text-brand-cyan px-2.5 py-1 rounded-full bg-slate-900/95 border border-brand-cyan/25">Web App</span>
+          <h3 id="portfolio-modal-title" class="text-2xl md:text-3xl font-display font-bold text-white tracking-tight mt-3">AeroFin Dashboard</h3>
+        </div>
+      </div>
+
+      <!-- Description content -->
+      <div class="p-6 md:p-8 flex-1 overflow-y-auto space-y-6">
+        <p id="portfolio-modal-description" class="text-sm md:text-base text-brand-text leading-relaxed">
+          Case study information loading...
+        </p>
+
+        <!-- Technology Ecosystem Details -->
+        <div class="space-y-3">
+          <h4 class="text-xs font-bold font-mono text-brand-cyan uppercase tracking-wider flex items-center gap-1.5 text-left rtl:text-right">
+            <i data-lucide="code" class="w-4 h-4"></i>
+            <span id="tech-ecosystem-title-t">Technology Ecosystem:</span>
+          </h4>
+          <div id="portfolio-modal-tech-list" class="flex flex-wrap gap-2">
+            <!-- Dynamically populated tags -->
+          </div>
+        </div>
+
+        <!-- Corporate Standards Callout -->
+        <div class="bg-brand-card border border-brand-border rounded-xl p-4 flex items-start gap-3.5">
+          <div class="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 mt-0.5 shrink-0 animate-pulse">
+            <i data-lucide="shield-check" class="w-5 h-5"></i>
+          </div>
+          <div class="text-left rtl:text-right">
+            <h5 class="text-sm font-bold text-brand-text" id="corp-guarantee-title">Enterprise Quality Standards</h5>
+            <p class="text-xs text-brand-muted leading-relaxed mt-1" id="corp-guarantee-desc">
+              This project features 100% test coverage, optimized serverless caching architectures, responsive security sandboxing, and routine automated audits.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Drawer bottom action footer -->
+      <div class="p-6 border-t border-brand-border bg-brand-card flex flex-col md:flex-row items-center justify-between gap-4 shrink-0">
+        <span id="portfolio-modal-id-badge" class="text-xs text-brand-dim font-mono uppercase">PROJECT ID: OXA-PORT-1</span>
+        <div class="flex gap-3 w-full md:w-auto">
+          <button id="portfolio-modal-cancel-btn" class="flex-1 md:flex-none px-5 py-2.5 rounded-xl border border-brand-border hover:border-brand-border-hover text-sm font-semibold text-brand-muted hover:text-brand-text transition-all cursor-pointer">Close View</button>
+          <a id="portfolio-modal-demo-link" href="#" class="flex-1 md:flex-none px-5 py-2.5 rounded-xl bg-gradient-to-r from-brand-purple to-brand-blue text-sm font-semibold text-white flex items-center justify-center gap-1.5 transition-transform duration-200 hover:-translate-y-0.5">
+            <span id="launch-demo-label-t">Launch Demo</span>
+            <i data-lucide="external-link" class="w-4 h-4"></i>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Core dynamic scripting entry point -->
+    <script type="module" src="/src/main.js"></script>
   </body>
 </html>
-
